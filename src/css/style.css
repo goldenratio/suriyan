@@ -1,0 +1,222 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+html {
+    height:100%;
+}
+
+body
+{
+    height: 100%;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    font-family: arial, verdana;
+    font-size: 13px;
+    color: #ffffff;
+    background-color: #000000;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+#main
+{
+    width: 100%;
+    height:100%;
+    display: block;
+}
+
+#canvasContainer
+{
+    width: 100%;
+    height: 300px;
+    padding: 5px 0px 5px 0px;
+    float: left;
+    display: block;
+}
+
+#controls
+{
+    width: 100%;
+    height: 40px;
+    background-color: #111111;
+    float: left;
+
+    border-top-style: solid;
+    border-width: 1px;
+    border-color: #191919;
+
+    display: block;
+}
+
+#options
+{
+    width: 100%;
+    height: 60px;
+    background-color: #161616;
+    float: left;
+    font-family: arial, verdana;
+    font-size: 12px;
+    color: #c6c6c6;
+
+    border-top-style: solid;
+    border-width: 1px;
+    border-color: #292929;
+
+    outline: 1px solid #070707;
+
+    display: block;
+}
+
+#slate
+{
+    background-color: #000000;
+}
+
+.controlsHolder
+{
+    padding-top: 10px;
+    width: 700px;
+    height: 35px;
+    /*background-color: green;*/
+    overflow: hidden;
+
+    margin: auto;
+}
+
+.optionsHolder
+{
+    padding-top: 5px;
+    width: 700px;
+    height: 55px;
+    /*background-color: green;*/
+    overflow: hidden;
+
+    margin: auto;
+}
+.optionsBlock
+{
+    padding: 0px 10px 0px 0px;
+    /*height: 60px;*/
+    /*background-color: red;*/
+    float: left;
+}
+
+.optionsBlock_Right
+{
+    padding: 0px 10px 0px 10px;
+    /*background-color: red;*/
+    float: right;
+}
+
+.optionsLabel
+{
+    /*background-color: red;*/
+    padding-bottom: 3px;
+    cursor: default;
+
+}
+
+.optionsContent
+{
+
+}
+
+.optionsGap
+{
+    width: 20px;
+    height: 60px;
+    display: block;
+    float: left;
+}
+
+#blocker
+{
+    width: 100%;
+    height: 100%;
+    z-index: 9990;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.69);
+    display: none;
+
+}
+
+#progressBarContainer,
+#statusMessage
+{
+    padding: 20px;
+    z-index: 9991;
+    position: absolute;
+
+
+    font-family: Arial;
+
+    background-color: rgba(255, 255, 255, 0.11);
+
+    border-top: 1px solid rgba(255,255,255,0.34);
+    border-right: 1px solid rgba(0,0,0,0.04);
+    border-bottom: 1px solid rgba(0,0,0,0.43);
+    border-left: 1px solid rgba(0,0,0,0.04);
+
+    box-shadow: 0 1px 1px rgba(0,0,0,0.25);
+
+    border-radius: 5px;
+    color: #FFFFFF;
+    text-decoration: none;
+    text-align: center;
+
+    display: none;
+}
+
+#displayBoxContainer
+{
+    float: left;
+}
+#displayNValueContainer
+{
+    display: none;
+    padding-left: 20px;
+    float: left;
+}
+
+
+#numValue
+{
+    width: 50px;
+    height: 18px;
+}
+
+#timeLine
+{
+    width: 595px;
+    height: 7px;
+}
+
+#fullscreenButton
+{
+    cursor: pointer;
+    background-color: blue;
+    width: 20px;
+    height: 20px;
+    display: block;
+}
+
+#playButton
+{
+    cursor: pointer;
+    background-color: red;
+    width: 20px;
+    height: 20px;
+    display: block;
+}
+
+#pauseButton
+{
+    cursor: pointer;
+    background-color: green;
+    width: 20px;
+    height: 20px;
+    display: block;
+}
+

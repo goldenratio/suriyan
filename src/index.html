@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Suriyan - Solar Image Viewer</title>
+    <link href="css/style.css" media="screen" rel="Stylesheet" type="text/css"/>
+    <link href="css/ui.css" media="screen" rel="Stylesheet" type="text/css"/>
+    <script src="js/basics.js"></script>
+    <script src="js/createjs-min.js"></script>
+
+    <script src="js/enums.js"></script>
+    <script src="js/noaaserver.js"></script>
+    <script src="js/imageslide.js"></script>
+    <script src="js/main.js"></script>
+
+</head>
+<body>
+<div id="main">
+    <div id="statusMessage">
+
+    </div>
+    <div id="progressBarContainer">
+        <progress value="0" max="100" id="progressBar"></progress>
+    </div>
+    <div id="blocker">
+
+    </div>
+    <div id="canvasContainer">
+        <canvas id="slate"></canvas>
+    </div>
+
+    <div id="controls">
+        <div class="controlsHolder">
+            <div class="optionsBlock">
+                <div id="playButton">
+
+                </div>
+            </div>
+            <div class="optionsBlock">
+                <div id="pauseButton">
+
+                </div>
+            </div>
+            <div class="optionsBlock">
+                <input type="range" id="timeLine"  min="1" max="1" value="1">
+            </div>
+            <div class="optionsBlock">
+                <div id="fullscreenButton">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="options">
+        <div class="optionsHolder">
+            <div class="optionsBlock">
+                <div class="optionsLabel">Image Type</div>
+                <div class="optionsContent">
+                    <label>
+                        <select id="types">
+                            <option value="instrument=EIT:wavelength=171">EIT 171</option>
+                            <option value="instrument=EIT:wavelength=195">EIT 195</option>
+                            <option value="instrument=EIT:wavelength=284">EIT 284</option>
+                            <option value="instrument=EIT:wavelength=304">EIT 304</option>
+                            <option value="instrument=HMI:obs_type=Continuum" selected>HMI Continuum</option>
+                            <option value="instrument=HMI:obs_type=Magnetogram">HMI Magnetogram&nbsp;&nbsp;</option>
+                            <option value="instrument=LASCO:detector=C2">LASCO C2</option>
+                            <option value="instrument=LASCO:detector=C3">LASCO C3</option>
+                            <option value="instrument=MDI:obs_type=Continuum">MDI Continuum</option>
+                            <option value="instrument=MDI:obs_type=Magnetogram">MDI Magnetogram</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+            <div class="optionsGap"></div>
+            <div class="optionsBlock">
+                <div class="optionsLabel">Resolution</div>
+                <div class="optionsContent">
+                    <label>
+                        <select id="resolution">
+                            <option value="1">High&nbsp;&nbsp;&nbsp;&nbsp;</option>
+                            <option value="2" selected>Low&nbsp;&nbsp;&nbsp;</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+            <div class="optionsGap"></div>
+            <div class="optionsBlock">
+                <div class="optionsLabel">Display</div>
+                <div class="optionsContent">
+                    <div id="displayBoxContainer">
+                        <label>
+                            <select id="display">
+                                <option value="1" selected>Latest Image</option>
+                                <option value="2">Latest 10 Images</option>
+                                <option value="3">Latest 'n' Images&nbsp;&nbsp;</option>
+                                <option value="4">by Date</option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <div id="displayNValueContainer">
+                        n = <input type="number" id="numValue" value="1" min="1" max="999">
+                    </div>
+
+                </div>
+            </div>
+            <div class="optionsGap"></div>
+            <div class="optionsBlock_Right">
+                <div class="action_button">
+                    <button class="holo-button" id="updateButton">Update</button>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+</body>
+</html>
