@@ -5,6 +5,9 @@
 var ImageSlide = (function() {
    "use strict";
 
+    /**
+     * @private
+     */
     var stage,
         container,
         selectedRes,
@@ -19,9 +22,9 @@ var ImageSlide = (function() {
         timer,
         timeLine,
         thisObject,
-        /*
-         private methods
-          */
+        /**
+         * Private methods
+         */
         onSliderChange,
         clearImage,
         onError,
