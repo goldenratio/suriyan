@@ -528,7 +528,13 @@ var main = new Main();
 
 function onLoad(event) {
     'use strict';
-    console.disable();
+    //console.disable();
     main.init();
 }
+
+function onContextMenu(event) {
+    event.preventDefault();
+}
+
 window.addEventListener(Event.LOAD, onLoad, false);
+window.addEventListener(MouseEvent.RIGHT_CLICK, onContextMenu, false);
