@@ -528,6 +528,7 @@ var main = new Main();
 
 function onLoad(event) {
     'use strict';
+    console.disable();
     main.init();
 }
 window.addEventListener(Event.LOAD, onLoad, false);
