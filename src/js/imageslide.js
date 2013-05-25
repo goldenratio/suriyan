@@ -1,3 +1,7 @@
+/**
+ * @author: Karthik VJ
+ */
+
 var ImageSlide = (function() {
    "use strict";
 
@@ -79,7 +83,7 @@ var ImageSlide = (function() {
     };
 
     /**
-     * Starts looading sequence of images
+     * Starts loading sequence of images
      * @param imageList
      * @param res
      * @public
@@ -246,8 +250,7 @@ var ImageSlide = (function() {
      */
     onProgress = function() {
         console.log("loading.. " + queue.progress);
-        var percent = Math.floor(queue.progress * 100);
-        progressBar.value = percent;
+        progressBar.value = Math.floor(queue.progress * 100);
     };
 
     /**
