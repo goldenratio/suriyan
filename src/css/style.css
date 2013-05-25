@@ -77,7 +77,7 @@ body
 .controlsHolder
 {
     padding-top: 10px;
-    width: 700px;
+    width: 705px;
     height: 35px;
     /*background-color: green;*/
     overflow: hidden;
@@ -88,7 +88,7 @@ body
 .optionsHolder
 {
     padding-top: 5px;
-    width: 700px;
+    width: 730px;
     height: 55px;
     /*background-color: green;*/
     overflow: hidden;
@@ -101,6 +101,12 @@ body
     /*height: 60px;*/
     /*background-color: red;*/
     float: left;
+}
+
+#displayDateRangeContainer
+{
+    float: left;
+    display: none;
 }
 
 .optionsBlock_Right
@@ -125,7 +131,7 @@ body
 
 .optionsGap
 {
-    width: 20px;
+    width: 5px;
     height: 60px;
     display: block;
     float: left;
@@ -176,7 +182,7 @@ body
 #displayNValueContainer
 {
     display: none;
-    padding-left: 20px;
+    padding-left: 10px;
     float: left;
 }
 
@@ -185,6 +191,15 @@ body
 {
     width: 50px;
     height: 18px;
+}
+
+#displayTo,
+#displayFrom
+{
+    width: 90px;
+    height: 18px;
+    font-size: 12px;
+    /*cursor: pointer;*/
 }
 
 #timeLine
@@ -196,7 +211,22 @@ body
 #fullscreenButton
 {
     cursor: pointer;
-    background-color: blue;
+    background-color: #1e1919;
+    background: linear-gradient(to bottom, rgb(43, 46, 51) 0%, rgb(25, 25, 25) 100%); /* W3C */
+    width: 20px;
+    height: 20px;
+    display: block;
+    border: 1px #000000 solid;
+    box-shadow: inset 0px 0px 4px 0px #000;
+
+    border-radius: 3px;
+}
+
+.fullScreenButtonImage
+{
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3QUZEigyDa26AAAAAFVJREFUOMvFkksKwEAMQlXm/le2my5KKKQZKZN9nvgBTh9tOyIkANteu0IkCQD67PV+qKdRYC8QjVMvEO2E+YQobURprUq3sbqa/p9yt75OgFP/1eoFWeUwBuDIgk4AAAAASUVORK5CYII=');
+    background-repeat: no-repeat;
+    background-position: 2px 1px;
     width: 20px;
     height: 20px;
     display: block;
@@ -205,18 +235,71 @@ body
 #playButton
 {
     cursor: pointer;
-    background-color: red;
+    background-color: #1e1919;
+    background: linear-gradient(to bottom, rgb(43, 46, 51) 0%, rgb(25, 25, 25) 100%); /* W3C */
+    width: 20px;
+    height: 20px;
+    display: block;
+    border: 1px #000000 solid;
+    box-shadow: inset 0px 0px 4px 0px #000;
+
+    border-radius: 3px;
+}
+
+.playButtonImage
+{
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3QUZFC0WSFTWJgAAAHJJREFUOMvdk0EKw0AMA+X0FQ15Q6Dk/x/KvUmxYSfXPWxK44UcqqtlIQtZ+l8AuPuzR6AAGzD3CAC8gfGMZ98E6rmZNbnDhUhw9zFzQo017UCSImJJZyDpYWYl4+AjaWot/5LBDrzSTYyIqaeJwy0/cwByl2VXv3k3ewAAAABJRU5ErkJggg==');
+    background-repeat: no-repeat;
+    background-position: 1px 1px;
     width: 20px;
     height: 20px;
     display: block;
 }
 
+#playButton:hover,
+#pauseButton:hover,
+#fullscreenButton:hover
+{
+    background: linear-gradient(to bottom, rgb(64, 68, 73) 0%, rgb(25, 25, 25) 100%); /* W3C */
+    box-shadow: inset 0px 0px 4px 0px #000;
+    border: 1px #000000 solid;
+}
+
+#playButton:active,
+#pauseButton:active,
+#fullscreenButton:active
+{
+    /*background: linear-gradient(to bottom, rgb(16, 17, 20) 0%, rgb(25, 25, 25) 100%); /* W3C */
+    /*box-shadow: inset 0px 0px 1px 1px #232323;*/
+
+    background: #1e1919;
+    box-shadow: inset 0px 0px 4px 0px #000;
+    border: 1px #000000 solid;
+}
+
 #pauseButton
 {
     cursor: pointer;
-    background-color: green;
+    background-color: #1e1919;
+    background: linear-gradient(to bottom, rgb(43, 46, 51) 0%, rgb(25, 25, 25) 100%); /* W3C */
+    width: 20px;
+    height: 20px;
+    display: block;
+    border: 1px #000000 solid;
+    box-shadow: inset 0px 0px 4px 0px #000;
+
+    border-radius: 3px;
+}
+
+.pauseButtonImage
+{
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3QUZFCcxF7GLxwAAACZJREFUOMtjYBjygBFd4P/////hkoyMjLjEYICJUheMGjBqwDABALEECBQrSrlcAAAAAElFTkSuQmCC');
+    background-repeat: no-repeat;
+    background-position: 2px 2px;
     width: 20px;
     height: 20px;
     display: block;
 }
+
+
 

@@ -28,6 +28,10 @@
 
         <copy file="${res.folder}/manifest.json" todir="${target.folder}/suriyan"/>
 
+        <zip destfile="${target.folder}/suriyan.zip"
+             basedir="${target.folder}/suriyan"
+                />
+
     </target>
 
 
@@ -37,7 +41,7 @@
 
     <target name="run" description="Run in a web browser">
         <exec executable="${browser.path}" spawn="true">
-            <arg value="${target.folder}/index.html"/>
+            <arg value="${target.folder}/suriyan/index.html"/>
         </exec>
     </target>
 

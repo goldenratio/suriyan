@@ -15,7 +15,11 @@ var RequestData = (function() {
         this.resolution = 2;
         this.start = "";
         this.finish = "";
-        this.numImg = 1;
+        /**
+         * Nummber of Images, unfortunately string type
+         * @type {string}
+         */
+        this.numImg = "";
         this.session = "1368516449_24443";
     }
 
@@ -80,7 +84,15 @@ var NOAAServer = (function() {
                     pattern = /http:\/\/sohowww(.*?)jpg/g,
                     parsedData = responseData.match(pattern);
 
-                parsedData.reverse();
+                if(parsedData) {
+                    parsedData.reverse();
+                }
+                else
+                {
+                    callbackRef(MessageMap.NO_DATA);
+                    return;
+                }
+
 
                 console.log(parsedData);
                 if(callbackRef !== undefined) {

@@ -211,3 +211,35 @@ input[type='range']::-webkit-slider-thumb:hover {
     background: linear-gradient(to bottom, rgb(175, 176, 175) 0%,rgba(14,14,14,1) 100%); /* W3C */
 
 }
+
+input[type='text'] {
+    padding:3px;
+    margin: 0;
+    -webkit-border-radius:4px;
+    -moz-border-radius:4px;
+    border-radius:4px;
+    -webkit-box-shadow: 0 3px 0 #0e0e0e, 0 -1px #3f3936 inset;
+    -moz-box-shadow: 0 3px 0 #0e0e0e, 0 -1px #3f3936 inset;
+    box-shadow: 0 3px 0 #0e0e0e, 0 -1px #3f3936 inset;
+    background: #1d1d1d;
+    color: #888;
+    text-shadow: 0px 1px #000000;
+    border: 1px solid #342e2c;
+    outline:none;
+    display: inline-block;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+}
+
+input[type='text']:hover {
+
+    border: 1px solid #797163;
+    color: #e0e0e0;
+}
+
+input[type='text']::-webkit-input-placeholder
+{
+    color: #2b2b2b;
+    text-shadow: none;
+}

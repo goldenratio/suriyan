@@ -23,11 +23,15 @@ var Main = (function()
         statusMessage,
         displaySelectBox,
         displayNContainer,
+        displayDateRangeContainer,
         fullScreenButton,
         playButton,
         pauseButton,
         context,
         mouseTimeOut,
+        fromDateTF,
+        toDateTF,
+        timeLineRange,
         /**
          * Private Methods
          */
@@ -71,9 +75,13 @@ var Main = (function()
         statusMessage = document.getElementById("statusMessage");
         displaySelectBox = document.getElementById("display");
         displayNContainer = document.getElementById("displayNValueContainer");
+        displayDateRangeContainer = document.getElementById("displayDateRangeContainer");
         fullScreenButton = document.getElementById("fullscreenButton");
         playButton = document.getElementById("playButton");
         pauseButton = document.getElementById("pauseButton");
+        fromDateTF = document.getElementById("displayFrom");
+        toDateTF = document.getElementById("displayTo");
+        timeLineRange = document.getElementById("timeLine");
 
         stage.autoClear = true;
 
@@ -234,12 +242,17 @@ var Main = (function()
      */
     onDisplayBoxChange = function(event) {
         var displayData = document.getElementById("display").options[document.getElementById("display").selectedIndex].value;
+
+        displayNContainer.style.display = "none";
+        displayDateRangeContainer.style.display = "none";
+
         if(displayData === "3") {
             displayNContainer.style.display = "block";
         }
-        else {
-            displayNContainer.style.display = "none";
+        else if(displayData === "4") {
+            displayDateRangeContainer.style.display = "block";
         }
+
     };
 
     /**
@@ -251,8 +264,10 @@ var Main = (function()
         var resData,
             types,
             displayData,
-            numImage,
-            reqData;
+            numImage = "",
+            reqData,
+            fromDate = "",
+            toDate = "";
 
         resData = document.getElementById("resolution").options[document.getElementById("resolution").selectedIndex].value;
         if(resData === "1") {
@@ -268,22 +283,27 @@ var Main = (function()
         numImage = 0;
 
         if(displayData === "1") {
-            numImage = 1;
+            numImage = "1";
         }
         else if(displayData === "2") {
-            numImage = 10;
+            numImage = "10";
         }
         else if(displayData === "3") {
-            numImage = document.getElementById("numValue").value;
+            numImage = document.getElementById("numValue").value.toString();
+        }
+        else if(displayData === "4") {
+            numImage = "";
+            fromDate = fromDateTF.value;
+            toDate = toDateTF.value;
         }
 
 
         reqData = new RequestData();
         reqData.resolution = resData;
-        if(numImage) {
-            reqData.numImg = numImage;
-        }
+        reqData.numImg = numImage;
         reqData.types = types;
+        reqData.start = fromDate;
+        reqData.finish = toDate;
 
         console.log(reqData);
 
@@ -427,6 +447,20 @@ var Main = (function()
         if(data === MessageMap.ERROR) {
             showMessage(MessageType.ERROR_DATA, true);
             return;
+        }
+
+        var disableAlpha = 0.2;
+        if(data.length <= 1) {
+            // reduce control's opacity
+            playButton.style.opacity = disableAlpha;
+            pauseButton.style.opacity = disableAlpha;
+            timeLineRange.style.opacity = disableAlpha;
+        }
+        else
+        {
+            playButton.style.opacity = 1;
+            pauseButton.style.opacity = 1;
+            timeLineRange.style.opacity = 1;
         }
 
         slide.stop();
