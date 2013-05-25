@@ -2,7 +2,7 @@
 	"manifest_version": 2,
 	
 	"name": "Suriyan",
-	"description": "Solar Viewer",
+	"description": "Solar Image Viewer",
 	"version": "0.1",
 	"permissions": [ "storage", "http://*.nascom.nasa.gov/*" ],
   

@@ -2,16 +2,14 @@
  * @author: Karthik VJ
  **/
 
-var RequestData = (function()
-{
+var RequestData = (function() {
     "use strict";
 
     /**
      * RequestData
      * @constructor
      */
-    function RequestData()
-    {
+    function RequestData() {
         // default values
         this.types = "instrument=EIT:wavelength=171";
         this.resolution = 2;
@@ -21,34 +19,42 @@ var RequestData = (function()
         this.session = "1368516449_24443";
     }
 
-    RequestData.prototype.generatePostData = function()
-    {
-        var data = "Collection=1&Types="+encodeURIComponent(this.types)+"&Resolution="+this.resolution+"&Display=List&Start="+this.start+"&Finish="+this.finish+"&NumImg="+this.numImg+"&Submit=Search&Session="+this.session+"&.cgifields=Display&.cgifields=Types";
+    /**
+     * Generates post data for NOAA server
+     * @return {string}
+     * @public
+     */
+    RequestData.prototype.generatePostData = function() {
+        var data = "Collection=1&Types=" + encodeURIComponent(this.types) + "&Resolution=" + this.resolution + "&Display=List&Start=" + this.start + "&Finish=" + this.finish + "&NumImg=" + this.numImg + "&Submit=Search&Session=" + this.session + "&.cgifields=Display&.cgifields=Types";
         return data;
-    }
+    };
 
     return RequestData;
 }());
 
-var NOAAServer = (function()
-{
+var NOAAServer = (function() {
     "use strict";
 
     var queryURL = "http://sohodata.nascom.nasa.gov/cgi-bin/data_query_search_movie",
         xhr,
-        callbackRef;
+        callbackRef,
+        onReadyState;
 
     /**
      * NOAAServer
      * @constructor
      */
-    function NOAAServer()
-    {
-
+    function NOAAServer() {
+        console.log("NOAAServer");
     }
 
-    NOAAServer.prototype.send = function(data, callback)
-    {
+    /**
+     * Sends request data to NOAA server
+     * @param data
+     * @param callback
+     * @public
+     */
+    NOAAServer.prototype.send = function(data, callback) {
         console.log("sending data.. " + data);
         callbackRef = callback;
         xhr = new XMLHttpRequest();
@@ -58,32 +64,35 @@ var NOAAServer = (function()
         xhr.send(data);
     };
 
-    var onReadyState = function()
-    {
+    /**
+     * Invoked when XHR state is changed
+     * @private
+     */
+    onReadyState = function() {
         console.log("state, " + xhr.readyState);
         console.log("status, " + xhr.status);
 
-        if(xhr.readyState == 4)
-        {
-            if(xhr.status == 200)
-            {
+        if(xhr.readyState === 4) {
+            if(xhr.status === 200) {
                 // resposne data
                 //console.log(xhr.responseText);
-                var responseData = xhr.responseText;
-                var pattern = /http:\/\/sohowww(.*?)jpg/g;
-                var parsedData = responseData.match(pattern);
+                var responseData = xhr.responseText,
+                    pattern = /http:\/\/sohowww(.*?)jpg/g,
+                    parsedData = responseData.match(pattern);
 
                 parsedData.reverse();
 
                 console.log(parsedData);
-                if(callbackRef != undefined)
+                if(callbackRef !== undefined) {
                     callbackRef(parsedData);
+                }
             }
-            else
-            {
+            else {
                 // error
-                if(callbackRef != undefined)
+                if(callbackRef !== undefined) {
                     callbackRef(MessageMap.ERROR);
+                }
+
 
             }
         }

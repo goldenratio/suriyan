@@ -3,17 +3,30 @@
 
 	<property file="build.properties"/>
 
-	<target name="package" depends="clean" description="Package">
-        <mkdir dir="${target.folder}"/>
-        <copy todir="${target.folder}">
+    <taskdef name="jslint"
+             classname="com.googlecode.jslint4java.ant.JSLintTask"
+             classpath="lib/jslint4java-2.0.4.jar" />
+
+    <target name="jsLint" description="jsLint">
+        <jslint options = "devel, browser, white, unparam, plusplus, bitwise, regexp" haltonfailure="false">
+            <predef>jQuery,$$, createjs, Rectangle, document, MessageType, MessageMap, FormEvent, Mouse, Event, MouseEvent, WEBKIT_EVENT, NOAAServer, ImageSlide, RequestData, Element</predef>
+            <formatter type="plain" />
+            <fileset dir="${src.folder}/js" includes="*.js" />
+        </jslint>
+    </target>
+
+	<target name="package" depends="clean, jsLint" description="Package">
+
+        <mkdir dir="${target.folder}/suriyan"/>
+        <copy todir="${target.folder}/suriyan">
             <fileset dir="${src.folder}"/>
         </copy>
 
-        <copy todir="${target.folder}/js">
+        <copy todir="${target.folder}/suriyan/js">
             <fileset dir="${js.res.folder}"/>
         </copy>
 
-        <copy file="${res.folder}/manifest.json" todir="${target.folder}"/>
+        <copy file="${res.folder}/manifest.json" todir="${target.folder}/suriyan"/>
 
     </target>
 

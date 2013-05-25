@@ -1,6 +1,5 @@
-var ImageSlide = (function()
-{
-    "use strict";
+var ImageSlide = (function() {
+   "use strict";
 
     var stage,
         container,
@@ -15,13 +14,26 @@ var ImageSlide = (function()
         timeDelay = 100,
         timer,
         timeLine,
-        thisObject;
+        thisObject,
+        /*
+         private methods
+          */
+        onSliderChange,
+        clearImage,
+        onError,
+        handleComplete,
+        showImage,
+        startTimer,
+        onProgress;
 
-
-    function ImageSlide(stageRef, contextRef)
-    {
-        if(stageRef === undefined)
-        {
+    /**
+     * Image Slide
+     * @param stageRef
+     * @param contextRef
+     * @constructor
+     */
+    function ImageSlide(stageRef, contextRef) {
+        if(stageRef === undefined) {
             console.log("stage ref is required");
             return;
         }
@@ -51,19 +63,28 @@ var ImageSlide = (function()
 
     }
 
-    function onSliderChange(event)
-    {
+    /**
+     * Invoked when Range UI is changed
+     * @param event
+     * @private
+     */
+    onSliderChange = function(event) {
         //console.log(event);
         //console.log(timeLine.value);
         thisObject.pause();
-        if(totalImages > 1)
+        if(totalImages > 1) {
             showImage(timeLine.value - 1);
+        }
 
-    }
+    };
 
-
-    ImageSlide.prototype.start = function(imageList, res)
-    {
+    /**
+     * Starts looading sequence of images
+     * @param imageList
+     * @param res
+     * @public
+     */
+    ImageSlide.prototype.start = function(imageList, res) {
         context.setPending(true);
         clearImage();
 
@@ -83,8 +104,7 @@ var ImageSlide = (function()
         queue.addEventListener(Event.PROGRESS, onProgress);
         queue.addEventListener(Event.ERROR, onError);
         var i;
-        for(i = 0; i < imageList.length; i++)
-        {
+        for(i = 0; i < imageList.length; i++) {
             queue.loadManifest([
                 {id: "image_" + i, src: imageList[i]}
             ], false);
@@ -94,8 +114,11 @@ var ImageSlide = (function()
 
     };
 
-    ImageSlide.prototype.stop = function()
-    {
+    /**
+     * Stops the image slide timer
+     * @public
+     */
+    ImageSlide.prototype.stop = function() {
         clearImage();
         if(timer)
         {
@@ -106,109 +129,147 @@ var ImageSlide = (function()
         currentImageCount = 0;
     };
 
-    ImageSlide.prototype.pause = function()
-    {
-        if(timer)
-        {
+    /**
+     * Pauses the image slide
+     * @public
+     */
+    ImageSlide.prototype.pause = function() {
+        if(timer) {
             clearTimeout(timer);
         }
     };
 
-    ImageSlide.prototype.play = function()
-    {
-        if(totalImages > 1)
+    /**
+     * Plays image slide
+     * @public
+     */
+    ImageSlide.prototype.play = function() {
+        if(totalImages > 1) {
             showImage();
+        }
+
     };
 
-    function clearImage()
-    {
-        if(timer)
-        {
+    /**
+     * Clear the display container of image and clear timer
+     * @private
+     */
+    clearImage = function() {
+        if(timer) {
             clearTimeout(timer);
         }
 
         container.removeAllChildren();
-    }
+    };
 
-    function onError()
-    {
+    /**
+     * Invoked when a image fails to load
+     * @private
+     */
+    onError = function() {
         console.log(queue.type);
         console.log(queue.item);
         console.log(queue.error);
-    }
+    };
 
-    function handleComplete()
-    {
+    /**
+     * Invoked when all images are loaded, preloaded is done loading
+     * @private
+     */
+    handleComplete = function() {
         console.log("all load complete");
         progressBarContainer.style.display = "none";
         context.setPending(false);
 
         currentImageCount = 0;
         showImage();
-    }
+    };
 
-    function showImage(index)
-    {
+    /**
+     * Displays image to canvas
+     * @param index
+     * @private
+     */
+    showImage = function(index) {
         clearImage();
-        if(index !== undefined) currentImageCount = index;
+        if(index !== undefined) {
+            currentImageCount = index;
+        }
 
-        if(currentImageCount >= totalImages)
-        {
+        if(currentImageCount >= totalImages) {
             currentImageCount = 0;
         }
-        var result = queue.getResult("image_" + currentImageCount);
-        if(!result)
-        {
+        var result,
+            image;
+
+        result = queue.getResult("image_" + currentImageCount);
+        if(!result) {
             console.log("image not loaded");
             // next image
             currentImageCount++;
             showImage();
             return;
         }
-        var image = new createjs.Bitmap(result);
+
+        image = new createjs.Bitmap(result);
         container.addChild(image);
 
-        if(index === undefined)
+        if(index === undefined) {
             timeLine.value = currentImageCount + 1;
+        }
+
 
         thisObject.resize();
 
-        if(totalImages > 1 && index === undefined)
+        if(totalImages > 1 && index === undefined) {
             startTimer();
-    }
+        }
 
-    function startTimer()
-    {
+    };
+
+    /**
+     * Starts the image slide timer
+     * @private
+     */
+    startTimer = function() {
         //console.log("timer");
 
-        timer = setTimeout(function()
-        {
+        timer = setTimeout(function() {
             currentImageCount++;
             showImage();
         }, timeDelay);
-    }
+    };
 
-    function onProgress()
-    {
+    /**
+     * Invoked when image loading is in progress
+     * @private
+     */
+    onProgress = function() {
         console.log("loading.. " + queue.progress);
         var percent = Math.floor(queue.progress * 100);
         progressBar.value = percent;
-    }
+    };
 
-    ImageSlide.prototype.resize = function(canvasWidth, canvasHeight)
-    {
+    /**
+     * Invoked when window is re-sized
+     * @param canvasWidth
+     * @param canvasHeight
+     * @public
+     */
+    ImageSlide.prototype.resize = function(canvasWidth, canvasHeight) {
         //var selectedRes = Res.HIGH;
-        if(canvasHeight !== undefined && canvasHeight !== undefined)
-        {
+        if((canvasWidth !== undefined) && (canvasHeight !== undefined)) {
             canvasProp.width = canvasWidth;
             canvasProp.height = canvasHeight;
         }
 
 
-        if(canvasProp.width < selectedRes || canvasProp.height < selectedRes)
-        {
-            var val = canvasProp.width < canvasProp.height ? canvasProp.width : canvasProp.height;
-            var percent = (val / selectedRes) * 1;
+        if(canvasProp.width < selectedRes || canvasProp.height < selectedRes) {
+            var val,
+                percent;
+
+            val = canvasProp.width < canvasProp.height ? canvasProp.width : canvasProp.height;
+            percent = ((val / selectedRes) * 100) / 100;
 
             container.scaleX = percent;
             container.scaleY = container.scaleX;
@@ -216,8 +277,7 @@ var ImageSlide = (function()
             container.x = (canvasProp.width >> 1) - (val >> 1);
             container.y = (canvasProp.height >> 1) - (val >> 1);
         }
-        else
-        {
+        else {
             container.scaleX = 1;
             container.scaleY = container.scaleX;
 
