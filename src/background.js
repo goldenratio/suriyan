@@ -7,7 +7,7 @@ var windowID = -1;
 var createData = {};
 createData.url = "index.html";
 createData.width = 800;
-createData.height = 800;
+createData.height = 600;
 createData.type = "popup";
 
 chrome.browserAction.onClicked.addListener(function(tab) {
