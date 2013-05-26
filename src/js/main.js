@@ -525,14 +525,23 @@ var Main = (function()
 }());
 
 var main = new Main();
+var background = chrome.extension.getBackgroundPage();
 
 function onLoad(event) {
     'use strict';
-    //console.disable();
+    console.disable();
+    chrome.windows.getCurrent(function(window){
+        //console.log(window);
+        console.log(window.id);
+        background.updateWindowID(window.id);
+    });
+
+    //console.log("window ID, " + chrome.windows.WINDOW_ID_CURRENT);
     main.init();
 }
 
 function onContextMenu(event) {
+    'use strict';
     event.preventDefault();
 }
 

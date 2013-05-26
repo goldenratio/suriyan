@@ -9,7 +9,7 @@
 
     <target name="jsLint" description="jsLint">
         <jslint options = "devel, browser, white, unparam, plusplus, bitwise, regexp" haltonfailure="false">
-            <predef>jQuery,$$, createjs, Rectangle, document, MessageType, MessageMap, FormEvent, Mouse, Event, MouseEvent, WEBKIT_EVENT, NOAAServer, ImageSlide, RequestData, Element</predef>
+            <predef>chrome, jQuery,$$, createjs, Rectangle, document, MessageType, MessageMap, FormEvent, Mouse, Event, MouseEvent, WEBKIT_EVENT, NOAAServer, ImageSlide, RequestData, Element</predef>
             <formatter type="plain" />
             <fileset dir="${src.folder}/js" includes="*.js" />
         </jslint>
