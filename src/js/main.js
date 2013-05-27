@@ -536,7 +536,7 @@ var background = chrome.extension.getBackgroundPage();
 
 function onLoad(event) {
     'use strict';
-    //console.disable();
+    console.disable();
     chrome.windows.getCurrent(function(window){
         //console.log(window);
         console.log(window.id);
