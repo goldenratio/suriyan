@@ -308,7 +308,7 @@ var Main = (function()
         console.log(reqData);
 
         context.setPending(true);
-        showMessage(MessageType.FETCHING_DATA, true);
+        showMessage(MessageMap.FETCHING_DATA, true);
         server.send(reqData.generatePostData(), context.serverCallback);
 
     };
@@ -341,27 +341,27 @@ var Main = (function()
         console.log(reqData);
 
         context.setPending(true);
-        showMessage(MessageType.FETCHING_DATA, true);
+        showMessage(MessageMap.FETCHING_DATA, true);
         server.send(reqData.generatePostData(), context.serverCallback);
     };
 
 
     /**
      * Displays toast like message
-     * @param messageType some text
+     * @param message some text
      * @param flag boolean true - show message, false - hide message
      * @private
      */
-    showMessage = function(messageType, flag) {
-        if(messageType === undefined) {
-            messageType = MessageType.FETCHING_DATA;
+    showMessage = function(message, flag) {
+        if(message === undefined) {
+            message = MessageMap.FETCHING_DATA;
         }
         if(flag === undefined) {
             flag = false;
         }
 
         if(flag === true) {
-            statusMessage.innerHTML = MessageMap[messageType];
+            statusMessage.innerHTML = message;
             statusMessage.style.display = "block";
         }
         else {
@@ -439,13 +439,20 @@ var Main = (function()
     /**
      * Handles NOAA server callback
      * @param data
+     * @param hasErrors
      * @public
      */
-    Main.prototype.serverCallback = function(data) {
-        console.log("NOAA callback" + data);
+    Main.prototype.serverCallback = function(data, hasErrors) {
+        console.log("NOAA callback, " + data);
+        if(hasErrors === undefined) {
+            hasErrors = false;
+        }
         showMessage(false);
-        if(data === MessageMap.ERROR) {
-            showMessage(MessageType.ERROR_DATA, true);
+
+        if(hasErrors === true) {
+            showMessage(data, true);
+            context.setPending(false);
+            slide.clear();
             return;
         }
 
@@ -529,7 +536,7 @@ var background = chrome.extension.getBackgroundPage();
 
 function onLoad(event) {
     'use strict';
-    console.disable();
+    //console.disable();
     chrome.windows.getCurrent(function(window){
         //console.log(window);
         console.log(window.id);

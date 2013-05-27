@@ -158,6 +158,14 @@ var ImageSlide = (function() {
     };
 
     /**
+     * Clear Image
+     * @public
+     */
+    ImageSlide.prototype.clear = function() {
+        clearImage();
+    };
+
+    /**
      * Clear the display container of image and clear timer
      * @private
      */

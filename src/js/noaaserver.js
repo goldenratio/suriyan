@@ -89,7 +89,7 @@ var NOAAServer = (function() {
                 }
                 else
                 {
-                    callbackRef(MessageMap.NO_DATA);
+                    callbackRef(MessageMap.NO_DATA, true);
                     return;
                 }
 
@@ -102,7 +102,7 @@ var NOAAServer = (function() {
             else {
                 // error
                 if(callbackRef !== undefined) {
-                    callbackRef(MessageMap.ERROR);
+                    callbackRef(MessageMap.ERROR_DATA, true);
                 }
 
 
