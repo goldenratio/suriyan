@@ -139,11 +139,11 @@ var Main = (function()
         var fullScreenElement = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement;
 
         //console.log(fullscreenElement);
-        if(fullScreenElement === null) {
+        if (fullScreenElement === null) {
             // stop auto mouse hide
             stopAutoMouseHide();
 
-            if(optionsContainer.style.display === "none")
+            if (optionsContainer.style.display === "none")
             {
                 optionsContainer.style.display = "block";
                 controlsContainer.style.display = "block";
@@ -168,7 +168,7 @@ var Main = (function()
         var fullScreenElement = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement;
 
         //console.log(fullscreenElement);
-        if(fullScreenElement === null) {
+        if (fullScreenElement === null) {
             launchFullScreen(document.documentElement); // the whole page
         }
         else {
@@ -190,7 +190,7 @@ var Main = (function()
      */
     stopAutoMouseHide = function() {
         window.removeEventListener(MouseEvent.MOUSE_MOVE, onWindowMouseMove, false);
-        if(mouseTimeOut) {
+        if (mouseTimeOut) {
             clearTimeout(mouseTimeOut);
         }
     };
@@ -203,16 +203,16 @@ var Main = (function()
      */
     onWindowMouseMove = function(event)
     {
-        if(event.webkitMovementX === 0 || event.webkitMovementY === 0) {
+        if (event.webkitMovementX === 0 || event.webkitMovementY === 0) {
             return;
         }
         //console.log(event);
-        if(mouseTimeOut) {
+        if (mouseTimeOut) {
             clearTimeout(mouseTimeOut);
         }
 
         // show controls
-        if(optionsContainer.style.display === "none") {
+        if (optionsContainer.style.display === "none") {
             console.log("mouse move");
             optionsContainer.style.display = "block";
             controlsContainer.style.display = "block";
@@ -246,10 +246,10 @@ var Main = (function()
         displayNContainer.style.display = "none";
         displayDateRangeContainer.style.display = "none";
 
-        if(displayData === "3") {
+        if (displayData === "3") {
             displayNContainer.style.display = "block";
         }
-        else if(displayData === "4") {
+        else if (displayData === "4") {
             displayDateRangeContainer.style.display = "block";
         }
 
@@ -270,10 +270,10 @@ var Main = (function()
             toDate = "";
 
         resData = document.getElementById("resolution").options[document.getElementById("resolution").selectedIndex].value;
-        if(resData === "1") {
+        if (resData === "1") {
             selectedRes = slide.Res.HIGH;
         }
-        else if(resData === "2") {
+        else if (resData === "2") {
             selectedRes = slide.Res.LOW;
         }
 
@@ -282,16 +282,16 @@ var Main = (function()
         displayData = document.getElementById("display").options[document.getElementById("display").selectedIndex].value;
         numImage = 0;
 
-        if(displayData === "1") {
+        if (displayData === "1") {
             numImage = "1";
         }
-        else if(displayData === "2") {
+        else if (displayData === "2") {
             numImage = "10";
         }
-        else if(displayData === "3") {
+        else if (displayData === "3") {
             numImage = document.getElementById("numValue").value.toString();
         }
-        else if(displayData === "4") {
+        else if (displayData === "4") {
             numImage = "";
             fromDate = fromDateTF.value;
             toDate = toDateTF.value;
@@ -324,10 +324,10 @@ var Main = (function()
             reqData;
 
         resData = document.getElementById("resolution").options[document.getElementById("resolution").selectedIndex].value;
-        if(resData === "1") {
+        if (resData === "1") {
             selectedRes = slide.Res.HIGH;
         }
-        else if(resData === "2") {
+        else if (resData === "2") {
             selectedRes = slide.Res.LOW;
         }
 
@@ -353,14 +353,14 @@ var Main = (function()
      * @private
      */
     showMessage = function(message, flag) {
-        if(message === undefined) {
+        if (message === undefined) {
             message = MessageMap.FETCHING_DATA;
         }
-        if(flag === undefined) {
+        if (flag === undefined) {
             flag = false;
         }
 
-        if(flag === true) {
+        if (flag === true) {
             statusMessage.innerHTML = message;
             statusMessage.style.display = "block";
         }
@@ -387,13 +387,13 @@ var Main = (function()
      * @private
      */
     launchFullScreen = function(element) {
-        if(element.requestFullScreen) {
+        if (element.requestFullScreen) {
             element.requestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
         }
-        else if(element.mozRequestFullScreen) {
+        else if (element.mozRequestFullScreen) {
             element.mozRequestFullScreen();
         }
-        else if(element.webkitRequestFullScreen) {
+        else if (element.webkitRequestFullScreen) {
             element.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
         }
     };
@@ -403,13 +403,13 @@ var Main = (function()
      * @private
      */
     cancelFullScreen = function() {
-        if(document.cancelFullScreen) {
+        if (document.cancelFullScreen) {
             document.cancelFullScreen();
         }
-        else if(document.mozCancelFullScreen) {
+        else if (document.mozCancelFullScreen) {
             document.mozCancelFullScreen();
         }
-        else if(document.webkitCancelFullScreen) {
+        else if (document.webkitCancelFullScreen) {
             document.webkitCancelFullScreen();
         }
     };
@@ -420,7 +420,7 @@ var Main = (function()
      * @private
      */
     onWindowResize = function(event) {
-        if(resizeTimer)
+        if (resizeTimer)
         {
             clearTimeout(resizeTimer);
         }
@@ -444,12 +444,12 @@ var Main = (function()
      */
     Main.prototype.serverCallback = function(data, hasErrors) {
         console.log("NOAA callback, " + data);
-        if(hasErrors === undefined) {
+        if (hasErrors === undefined) {
             hasErrors = false;
         }
         showMessage(false);
 
-        if(hasErrors === true) {
+        if (hasErrors === true) {
             showMessage(data, true);
             context.setPending(false);
             slide.clear();
@@ -457,7 +457,7 @@ var Main = (function()
         }
 
         var disableAlpha = 0.2;
-        if(data.length <= 1) {
+        if (data.length <= 1) {
             // reduce control's opacity
             playButton.style.opacity = disableAlpha;
             pauseButton.style.opacity = disableAlpha;
@@ -480,12 +480,12 @@ var Main = (function()
      * @public
      */
     Main.prototype.setPending = function(state) {
-        if(state === undefined) {
+        if (state === undefined) {
             state = true;
         }
         //draw blocker
         var blocker = document.getElementById("blocker");
-        if(state === true) {
+        if (state === true) {
             blocker.style.display = "block";
         }
         else {
@@ -517,7 +517,7 @@ var Main = (function()
         canvasContainer.style.height = canvasHeight.toString() + "px";
         canvasContainer.style.width = canvasWidth.toString() + "px";
 
-        if(slide) {
+        if (slide) {
             slide.resize(canvasWidth, canvasHeight);
         }
 
