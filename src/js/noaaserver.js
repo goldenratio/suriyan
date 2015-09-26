@@ -76,7 +76,7 @@ var NOAAServer = (function() {
         console.log("state, " + xhr.readyState);
         console.log("status, " + xhr.status);
 
-        if(xhr.readyState === 4) {
+        if (xhr.readyState === 4) {
             if(xhr.status === 200) {
                 // resposne data
                 //console.log(xhr.responseText);
@@ -84,7 +84,7 @@ var NOAAServer = (function() {
                     pattern = /http:\/\/sohowww(.*?)jpg/g,
                     parsedData = responseData.match(pattern);
 
-                if(parsedData) {
+                if (parsedData) {
                     parsedData.reverse();
                 }
                 else
@@ -95,13 +95,13 @@ var NOAAServer = (function() {
 
 
                 console.log(parsedData);
-                if(callbackRef !== undefined) {
+                if (callbackRef !== undefined) {
                     callbackRef(parsedData);
                 }
             }
             else {
                 // error
-                if(callbackRef !== undefined) {
+                if (callbackRef !== undefined) {
                     callbackRef(MessageMap.ERROR_DATA, true);
                 }
 
