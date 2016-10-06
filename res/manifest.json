@@ -3,8 +3,8 @@
 	
 	"name": "Suriyan",
 	"description": "Solar Image Viewer. Displays the latest solar images from SOHO (Solar & Heliospheric Observatory).",
-	"version": "0.2",
-	"permissions": [ "tabs", "http://*.nascom.nasa.gov/*" ],
+	"version": "0.3",
+	"permissions": [ "tabs", "https://*.nascom.nasa.gov/*" ],
   
 	"icons": { 
 		"16": "icons/16.png",

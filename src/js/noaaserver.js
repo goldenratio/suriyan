@@ -39,7 +39,7 @@ var RequestData = (function() {
 var NOAAServer = (function() {
     "use strict";
 
-    var queryURL = "http://sohodata.nascom.nasa.gov/cgi-bin/data_query_search_movie",
+    var queryURL = "https://sohodata.nascom.nasa.gov/cgi-bin/data_query_search_movie",
         xhr,
         callbackRef,
         onReadyState;
@@ -81,7 +81,7 @@ var NOAAServer = (function() {
                 // resposne data
                 //console.log(xhr.responseText);
                 var responseData = xhr.responseText,
-                    pattern = /http:\/\/sohowww(.*?)jpg/g,
+                    pattern = /https:\/\/sohowww(.*?)jpg/g,
                     parsedData = responseData.match(pattern);
 
                 if (parsedData) {
